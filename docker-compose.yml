@@ -1,0 +1,30 @@
+version: '3.0'
+
+services:
+    wish-srv:
+      build: .
+      image: org/wish-srv:dev
+      container_name: wish-srv-dev
+      depends_on:
+        - mongo
+      volumes:
+        - ./:/app
+      privileged: true
+      ports:
+        - "8080:8080"
+      networks:
+        - development
+      command: ./mvnw spring-boot:run
+    mongo:
+      image: mongo:latest
+      container_name: wish-mongo-dev
+      volumes:
+        - ./data/db:/data/db
+      ports:
+        - "27017:27017"
+      networks:
+        - development
+
+networks:
+  development:
+    driver: bridge

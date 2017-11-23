@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  contextPath: /wishlist-srv
+spring:
+  data:
+    mongodb:
+      database: wish
+      host: mongo
+      port: 27017
