@@ -27,8 +27,7 @@ public class WishListDaoImpl implements WishListDao {
         return wishListRepository.findAllByOrderByDateDesc(pageable);
     }
 
-    @Override
-    public Wish get(String id) {
+    public Wish get(Long id) {
         return wishListRepository.findOne(id);
     }
 
@@ -53,8 +52,7 @@ public class WishListDaoImpl implements WishListDao {
         return updated;
     }
 
-    @Override
-    public Wish delete(String id) {
+    public Wish delete(Long id) {
         Wish deleted = null;
 
         Wish toBeDeleted = wishListRepository.findOne(id);

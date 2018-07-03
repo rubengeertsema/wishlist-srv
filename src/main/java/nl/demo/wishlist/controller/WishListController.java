@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
  * Created by rubengeertsema on 16/04/2017.
  */
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/wishes")
 public class WishListController {
 
     private final WishListDaoImpl wishListDao;
@@ -31,7 +31,7 @@ public class WishListController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") String id) {
+    public ResponseEntity get(@PathVariable("id") Long id) {
         Wish wish = wishListDao.get(id);
 
         return (wish == null)
@@ -54,7 +54,7 @@ public class WishListController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") String id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         Wish deletedWish = wishListDao.delete(id);
 
         return (deletedWish == null)
@@ -65,6 +65,6 @@ public class WishListController {
     @DeleteMapping
     public ResponseEntity deleteAll() {
         wishListDao.deleteAll();
-        return new ResponseEntity<>("Deleted all wishes.", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

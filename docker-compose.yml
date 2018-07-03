@@ -6,7 +6,7 @@ services:
       image: org/wish-srv:dev
       container_name: wish-srv-dev
       depends_on:
-        - mongo
+        - postgres
       volumes:
         - ./:/app
       privileged: true
@@ -14,14 +14,18 @@ services:
         - "8080:8080"
       networks:
         - development
-      command: ./mvnw spring-boot:run
-    mongo:
-      image: mongo:latest
-      container_name: wish-mongo-dev
+      command: ./mvnw spring-boot:run -DskipTests
+    postgres:
+      image: postgres
       volumes:
-        - ./data/db:/data/db
+        - ./data/pgdata:/pgdata
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       ports:
-        - "27017:27017"
+        - "5432:5432"
+      environment:
+        - POSTGRES_USER=docker
+        - POSTGRES_PASSWORD=docker
+        - PGDATA=/pgdata
       networks:
         - development
 

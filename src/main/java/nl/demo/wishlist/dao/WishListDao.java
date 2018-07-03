@@ -9,13 +9,13 @@ import org.springframework.data.domain.Pageable;
  */
 public interface WishListDao {
 
-    public Wish get(String id);
+    public Wish get(Long id);
 
     public Wish create(Wish wish);
 
     public Wish update(Wish wish);
 
-    public Wish delete(String id);
+    public Wish delete(Long id);
 
     public Page<Wish> getAll(Pageable pageable);
 
