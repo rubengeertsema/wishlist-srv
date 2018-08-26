@@ -13,7 +13,7 @@ services:
       ports:
         - "8080:8080"
       networks:
-        - development
+        - backend
       command: ./mvnw spring-boot:run -DskipTests
     postgres:
       image: postgres
@@ -27,8 +27,8 @@ services:
         - POSTGRES_PASSWORD=docker
         - PGDATA=/pgdata
       networks:
-        - development
+        - backend
 
 networks:
-  development:
+  backend:
     driver: bridge

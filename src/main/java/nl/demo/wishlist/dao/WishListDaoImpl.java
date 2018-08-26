@@ -7,11 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 
-/**
- * Created by rubengeertsema on 17/04/2017.
- */
 @Component
 public class WishListDaoImpl implements WishListDao {
 
@@ -24,16 +21,16 @@ public class WishListDaoImpl implements WishListDao {
 
     @Override
     public Page<Wish> getAll(Pageable pageable) {
-        return wishListRepository.findAllByOrderByDateDesc(pageable);
+        return wishListRepository.findAllByOrderByDateTimeDesc(pageable);
     }
 
     public Wish get(Long id) {
-        return wishListRepository.findOne(id);
+        return wishListRepository.getOne(id);
     }
 
     @Override
     public Wish create(Wish wish) {
-        wish.setDate(new Date());
+        wish.setDateTime(ZonedDateTime.now());
         return wishListRepository.save(wish);
     }
 
@@ -41,11 +38,11 @@ public class WishListDaoImpl implements WishListDao {
     public Wish update(Wish wish) {
         Wish updated = null;
 
-        Wish toBeUpdated = wishListRepository.findOne(wish.getId());
+        Wish toBeUpdated = wishListRepository.getOne(wish.getId());
         if (toBeUpdated != null) {
             toBeUpdated.setTitle(wish.getTitle());
             toBeUpdated.setDescription(wish.getDescription());
-            toBeUpdated.setDate(new Date());
+            toBeUpdated.setDateTime(ZonedDateTime.now());
             updated = wishListRepository.save(toBeUpdated);
         }
 
@@ -55,7 +52,7 @@ public class WishListDaoImpl implements WishListDao {
     public Wish delete(Long id) {
         Wish deleted = null;
 
-        Wish toBeDeleted = wishListRepository.findOne(id);
+        Wish toBeDeleted = wishListRepository.getOne(id);
         if (toBeDeleted != null) {
             wishListRepository.delete(toBeDeleted);
             deleted = toBeDeleted;

@@ -1,31 +1,33 @@
 package nl.demo.wishlist.model;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.ZonedDateTime;
 
-/**
- * Created by rubengeertsema on 16/04/2017.
- */
-@Entity
-@Table(name = "WISHES")
 @Data
+@Entity
+@Table(name = "WISHES", schema = "wishes")
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"date"})
-public class Wish {
+@EqualsAndHashCode(exclude = {"dateTime"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // https://hibernate.atlassian.net/browse/OGM-641?attachmentOrder=desc
+public class Wish implements Serializable {
 
     @Id
     @Column(name = "WISH_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter @Setter private Long id;
+    private Long id;
 
     @Column(name = "WISH_TITLE")
-    @Getter @Setter private String title;
+    private String title;
 
     @Column(name = "WISH_DESCRIPTION")
-    @Getter @Setter private String description;
+    private String description;
 
-    @Column(name = "WISH_DATE", columnDefinition = "TIMESTAMP")
-    @Getter @Setter private Date date;
+    @Column(name = "WISH_DATE", columnDefinition = "DATETIME")
+    private ZonedDateTime dateTime;
 }

@@ -14,6 +14,5 @@ spring:
       ddl-auto: create
       use-new-id-generator-mappings: true
       jadira.usertype.autoRegisterUserTypes: true
-
-liquibase:
-  enabled: false
+  liquibase:
+    enabled: false

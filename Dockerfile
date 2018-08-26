@@ -1,10 +1,10 @@
 FROM java:8-alpine
 MAINTAINER Ruben Geertsema
 
-# Create a directory where our app will live
+# Create app dir
 RUN mkdir -p /app
 
-# Change working directory
+# Change working directory to app dir
 WORKDIR /app
 
 # Add app to working dir

@@ -1,6 +1,7 @@
 target
 data
 db
+!**/resources/db
 .mvn
 .idea
 *.iml
