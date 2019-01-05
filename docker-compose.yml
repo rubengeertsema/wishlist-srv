@@ -1,33 +1,34 @@
 version: '3.0'
 
 services:
-    wish-srv:
-      build: .
-      image: org/wish-srv:dev
-      container_name: wish-srv-dev
-      depends_on:
-        - postgres
-      volumes:
-        - ./:/app
-      privileged: true
-      ports:
-        - "8080:8080"
-      networks:
-        - backend
-      command: ./mvnw spring-boot:run -DskipTests
-    postgres:
-      image: postgres
-      volumes:
-        - ./data/pgdata:/pgdata
-        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      ports:
-        - "5432:5432"
-      environment:
-        - POSTGRES_USER=docker
-        - POSTGRES_PASSWORD=docker
-        - PGDATA=/pgdata
-      networks:
-        - backend
+  wishlist-srv:
+    build: .
+    image: org/wish-srv:dev
+    container_name: wish-srv-dev
+    depends_on:
+    - wishlist-db
+    volumes:
+    - ./:/app
+    privileged: true
+    ports:
+    - "8080:8080"
+    networks:
+    - backend
+    command: ./mvnw spring-boot:run -DskipTests
+
+  wishlist-db:
+    image: postgres
+    volumes:
+    - ./data/pgdata:/pgdata
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+    - "5432:5432"
+    environment:
+    - POSTGRES_USER=docker
+    - POSTGRES_PASSWORD=docker
+    - PGDATA=/pgdata
+    networks:
+    - backend
 
 networks:
   backend:

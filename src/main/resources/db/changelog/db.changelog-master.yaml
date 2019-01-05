@@ -1,0 +1,39 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: rubengeertsema
+      changes:
+        - createSequence:
+            sequenceName: hibernate_sequence
+
+#  - changeSet:
+#    id: 2
+#    author: rubengeertsema
+#    changes:
+#      - sql:
+#          dbms: h2, postgresql
+#          sql: create schema "wishes" authorization wishes
+
+  - changeSet:
+      id: 3
+      author: rubengeertsema
+      changes:
+        - createTable:
+            tableName: wishes
+            columns:
+              - column:
+                  name: wish_id
+                  type: bigint
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: wish_date
+                  type: timestamp(6) without time zone
+              - column:
+                  name: wish_description
+                  type: varchar(255)
+              - column:
+                  name: wish_title
+                  type: varchar(255)

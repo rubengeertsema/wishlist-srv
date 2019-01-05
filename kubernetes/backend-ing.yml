@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: backend-ingress
+  labels:
+    app: wishlist-backend
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /api/wishes
+            backend:
+              serviceName: wishlist-backend
+              servicePort: 8080

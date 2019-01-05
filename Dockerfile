@@ -8,10 +8,10 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Add app to working dir
-ADD target/wish*.jar /app/app.jar
+#ADD target/wish*.jar /app/app.jar
 
 # Expose port
 EXPOSE 8080
 
 # Container startup command
-CMD ["java", "-jar", "app.jar"]
+#CMD ["java", "-jar", "app.jar"]
